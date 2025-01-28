@@ -175,4 +175,17 @@ const resetPassword = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, forgotPassword, verifyOtp, resetPassword };
+// Get All Files from MongoDB
+const fetchData = async (req, res) => {
+  try {
+    const Data = await UserModel.find(); // Fetch all documents
+    res.status(200).json(Data); // Send them as JSON
+  } catch (error) {
+    console.error("Error fetching files:", error);
+    res.status(500).json({ message: "Failed to retrieve files", error });
+  }
+};
+
+
+
+module.exports = { signup, login, fetchData , forgotPassword, verifyOtp, resetPassword };
